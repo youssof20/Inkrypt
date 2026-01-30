@@ -1,0 +1,73 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+        
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+      
+    - name: Build release APK
+      run: ./gradlew assembleRelease
+      
+    - name: Generate SHA-256 hash
+      id: hash
+      run: |
+        if [ -f "app/build/outputs/apk/release/app-release-unsigned.apk" ]; then
+          SHA256=$(sha256sum app/build/outputs/apk/release/app-release-unsigned.apk | cut -d ' ' -f 1)
+          echo "sha256=$SHA256" >> $GITHUB_OUTPUT
+        fi
+        
+    - name: Upload APK artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: app-release-unsigned
+        path: app/build/outputs/apk/release/app-release-unsigned.apk
+        retention-days: 30
+        
+    - name: Create Release
+      if: startsWith(github.ref, 'refs/tags/')
+      uses: softprops/action-gh-release@v1
+      with:
+        files: app/build/outputs/apk/release/app-release-unsigned.apk
+        body: |
+          ## Release ${{ github.ref_name }}
+          
+          ### APK
+          - **File**: `app-release-unsigned.apk`
+          - **SHA-256**: `${{ steps.hash.outputs.sha256 }}`
+          
+          ### Installation
+          1. Download the APK
+          2. Enable "Install from Unknown Sources" on your Android device
+          3. Install the APK
+          
+          ### Verification
+          To verify the APK signature (after signing):
+          ```bash
+          apksigner verify --print-certs app-release.apk
+          ```
+          
+          ### Building from Source
+          See [README.md](README.md) for build instructions.
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+

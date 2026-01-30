@@ -1,0 +1,28 @@
+# Built outputs
+*.iml
+.gradle
+/build
+/app/build
+*.apk
+*.aab
+
+# Local config (do not commit)
+local.properties
+/local.properties
+
+# IDE
+.idea/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Android
+/captures
+.externalNativeBuild
+.cxx
+
+# Keystore (never commit)
+*.jks
+*.keystore

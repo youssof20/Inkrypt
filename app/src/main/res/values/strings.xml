@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Inkrypt</string>
+    <string name="widget_description">Quick capture widget for Inkrypt journal entries</string>
+</resources>
