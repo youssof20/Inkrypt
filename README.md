@@ -2,6 +2,8 @@
 
 Private, encrypted journal for Android. Everything stays on your device. No account, no cloud.
 
+[**Download APK**](https://github.com/youssof20/Inkrypt/blob/main/app/release/app-release.apk) *(latest release)*
+
 ## What it does
 
 - Journal entries with optional tags and images
@@ -25,5 +27,4 @@ Release: `./gradlew assembleRelease`. Sign the APK yourself (see Android docs on
 
 ## License
 
-MIT. See [LICENSE](LICENSE).
-"# Inkrypt" 
+MIT. See [LICENSE](LICENSE). 
