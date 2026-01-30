@@ -19,7 +19,7 @@ Android 8.0+. Needs JDK 11+.
 ./gradlew assembleDebug
 ```
 
-APK: `app/build/outputs/apk/debug/app-debug.apk`
+APK: `app/release`
 
 Release: `./gradlew assembleRelease`. Sign the APK yourself (see Android docs on signing). Publish SHA-256 with releases so people can verify.
 
