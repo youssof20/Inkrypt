@@ -23,6 +23,7 @@ Thumbs.db
 .externalNativeBuild
 .cxx
 
-# Keystore (never commit)
+# Keystore and signing (never commit)
 *.jks
 *.keystore
+keystore.properties

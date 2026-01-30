@@ -87,6 +87,7 @@ dependencies {
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.core)
     androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation("androidx.test:core:1.5.0")
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
